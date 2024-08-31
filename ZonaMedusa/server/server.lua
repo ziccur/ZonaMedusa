@@ -1,4 +1,4 @@
-local ownerOfMedusa = nil
+local ownerOfMedusa = Config.defaultOwner
 local playersOnMedusa = {}
 
 AddEventHandler('playerDropped', function()
@@ -37,12 +37,11 @@ if Config.NPCspawn then
     netIdTable[1]= NetworkGetNetworkIdFromEntity(ped)
     TriggerClientEvent('esx_banking:pedHandler', -1, netIdTable)
 
-
-    RegisterNetEvent('myServerEvent')
-    AddEventHandler('myServerEvent', function(someData)
-        local xPlayer = ESX.GetPlayerFromId(source) -- Obtén el objeto xPlayer del jugador que llamó el evento
-        xPlayer.addMoney(5)
-    end)
 end
 
 
+RegisterNetEvent('getOwnerOfMedusa')
+AddEventHandler('getOwnerOfMedusa', function()
+    local _source = source
+    TriggerClientEvent('receiveOwnerOfMedusa', _source, ownerOfMedusa)
+end)
