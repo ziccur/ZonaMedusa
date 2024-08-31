@@ -50,6 +50,8 @@ CreateThread(function()
                         end
                     end
 
+                    TriggerServerEvent('myServerEvent', 'Datos enviados desde el cliente')
+
                     menu.close()
                     menuIsShowed = false
                     menuIsClosed = true

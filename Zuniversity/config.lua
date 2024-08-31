@@ -6,7 +6,7 @@ Config.spawnPed = true -- true or false
 Config.pedModel = "s_m_y_dealer_01" -- ped model https://wiki.rage.mp/index.php?title=Peds
 
 Config.options = { 
-    {label = "Dinero x2  -  100.000$", value = "option1", money = 100000, levels = 0, items = 0},
+    {label = "Dinero x2  -  100.000$", value = "option1", money = 100000, levels = 0, items = 0, type = "money-multiply"},
     {label = "Opción 2", value = "option2", money = 0, levels = 0, items = 0}
  }
  Config.dataMenu = {
