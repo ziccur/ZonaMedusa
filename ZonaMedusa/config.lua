@@ -4,8 +4,7 @@ Config.Lenguage = 'en'
 Config.location = vector3(1748.0743, 3268.5168, 41.2383)
 
 Config.allowedJobs = {
-    'police',
-    'ambulance'
+    'police'
 }
 
 Config.NPCspawn = true
@@ -17,7 +16,7 @@ Config.Size = { --? Tamaño de la zona
     z = 100
 }
 
-Config.timeToConquer = 300 --? Tiempo en segundos para conquistar la zona
+Config.timeToConquer = 10 --? Tiempo en segundos para conquistar la zona
 Config.timeToReward = 300 --? Cada cuantos segundos dar la recompensa 
 
 Config.rewardGangs = {
@@ -35,5 +34,5 @@ Config.BlipSprite = 429 --? Icono del blip (icono de la policía)
 Config.BlipAlpha = 50 --? Opacidad del blip
 Config.range = 100.0 --? Rango del blip
 
-Config.defaultOwner = 'No conquistado'
+Config.defaultOwner = 'LSPD'
 
