@@ -23,12 +23,25 @@ CreateThread(function()
     while true do
         local playerPed = ESX.PlayerData.ped
         local coords = GetEntityCoords(playerPed)
+        
+        --? Comprueba si el jugador esta en el rango del punto
         if (#(coords - vector3(location.x, location.y, location.z)) < Size.x ) then
-            menuIsShowed = true
+            if not menuIsShowed then
                 ESX.UI.Menu.Open("default", "Zuniversity", "Universidad", data, submit, cancel, change, close)
+                menuIsShowed = true
+            end
+           
+            --? si el jugador se aleja del punto elimina el menu
+            while menuIsShowed and not (#(coords - vector3(location.x, location.y, location.z)) < Size.x ) do 
+                ESX.UI.Menu.Close("default", "Zuniversity", "Universidad")
+                menuIsShowed = false
+                Wait(0)
+            end
 
-        else -- si el jugador no esta en el rango elimina la notificación
+
+        else --? si el jugador no esta en el rango elimina el menu
             ESX.UI.Menu.Close("default", "Zuniversity", "Universidad")
+            menuIsShowed = false
         end
         Wait(500)
     end
