@@ -1,6 +1,16 @@
 ESX = exports["es_extended"]:getSharedObject()
 local menuIsShowed = false
 
+local data = {
+    title = "Mi Menú",
+    align = "top-left",
+    elements = {
+      {label = "Opción 1", value = "opcion1"},
+      {label = "Opción 2", value = "opcion2"}
+    }
+  }
+   
+
 local location = vector3(-1637.1189, 180.4041, 61.7573)
 
 Size = {
@@ -14,26 +24,15 @@ CreateThread(function()
         local playerPed = ESX.PlayerData.ped
         local coords = GetEntityCoords(playerPed)
         if (#(coords - vector3(location.x, location.y, location.z)) < Size.x ) then
-            ESX.TextUI("Pulsa E para acceder a la universidad")
-            
-            while not IsControlJustPressed(0, 38) do -- Control de la tecla E
-                Wait(0)
-            end
             menuIsShowed = true
+                ESX.UI.Menu.Open("default", "Zuniversity", "Universidad", data, submit, cancel, change, close)
 
         else -- si el jugador no esta en el rango elimina la notificación
-            ESX.HideUI()
+            ESX.UI.Menu.Close("default", "Zuniversity", "Universidad")
         end
         Wait(500)
     end
 end)
 
 
-CreateThread(function()
-
-    
-
-
-
-
-end)
+  
