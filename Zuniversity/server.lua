@@ -1,6 +1,6 @@
 
-local pedCoords = vector3(-1637.1189, 180.4041, 61.7573)
-local pedModel = "a_m_m_business_01"
+local pedCoords = Config.location
+local pedModel = Config.pedModel
 
 netIdTable = {}
 

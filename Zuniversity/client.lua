@@ -1,17 +1,8 @@
 ESX = exports["es_extended"]:getSharedObject()
 local menuIsShowed = false
 
-local data = {
-    title = "Mi Menú",
-    align = "top-left",
-    elements = {
-      {label = "Opción 1", value = "opcion1"},
-      {label = "Opción 2", value = "opcion2"}
-    }
-  }
-   
-
-local location = vector3(-1637.1189, 180.4041, 61.7573)
+local data = Config.dataMenu
+local location = Config.location
 
 Size = {
     x = 3.0,
