@@ -13,8 +13,29 @@ function inZone()
     return (#(playerCoords - Config.location) < Config.Size.x)
 end
 
+function conquer()
+    --areOtherConquering = --TODO: Server event to check if other players are conquering
+    print("ENVIANDO AL SERVIDOR: CHEQUEAR SI OTROS JUGADORES ESTÁN CONQUISTANDO")
 
---! -------------------------------------------------------------------------------------------------------------------
+    if areOtherConquering then --! Alive, in zone, allowed job and other players are conquering
+
+        ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
+        print('Hay otros jugadores conquistando la zona')
+        return
+
+    else --! Alive, in zone, allowed job and no one is conquering
+
+        isConquering = true 
+        print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
+        --TODO: Server event to start conquering
+        ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
+
+    end
+    
+end
+
+
+--! -------------------------------------------------------------------------------------------------------------------------------------------------
 
 local location = Config.location
 local defaultOwner = Config.defaultOwner
@@ -43,31 +64,30 @@ CreateThread(function()
 
                 end
                 
-
                 if allowedJob() then --! Alive, in zone and allowed job
 
-                    if isConquering then --! Alive, in zone, allowed job and already conquering
-                        ESX.ShowNotification('~r~ Ya estás conquistando la zona')
-                        print('Ya estás conquistando la zona')
-                    end 
+                    if not isConquering then --! Alive, in zone, allowed job and already conquering
+
+                        CreateThread(function() --! CHECK E KEY FOR CONQUER
+                            while true do
+                                while not IsControlPressed(0, Config.conquerKey) do 
+                                    Wait(0)
+                                end
+                                if inZone() and not isConquering then
+                                    isConquering = true
+                                    conquer()
+                                    break
+                                end
+                                Wait(0)
+                                break
+                            end
+                        end)
+
+                    end
 
                     
-                    if not isConquering then 
-                        
-                        --areOtherConquering = --TODO: Server event to check if other players are conquering
-                        print("ENVIANDO AL SERVIDOR: CHEQUEAR SI OTROS JUGADORES ESTÁN CONQUISTANDO")
-
-                        if areOtherConquering then --! Alive, in zone, allowed job and other players are conquering
-                            ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
-                            print('Hay otros jugadores conquistando la zona')
-                            return
-                        else --! Alive, in zone, allowed job and no one is conquering
-                            isConquering = true 
-                            print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
-                            --TODO: Server event to start conquering
-                            ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
-                        end
-                    end
+                    
+                    
 
                 else --! Alive, in zone and not allowed job
                     ESX.TextUI('~r~ No tienes permiso para conquistar la zona')
@@ -102,15 +122,10 @@ CreateThread(function()
                     isInside = false 
                     
                 end
-                
+
             end
 
         end
 
     end
 end)
-
-
-
-
-

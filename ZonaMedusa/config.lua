@@ -10,8 +10,10 @@ Config.allowedJobs = {
 Config.canConquerWithOthersOnZone = false --? Puede conquistar con otros jugadores en la zona
 Config.canConquerWithoutPolice = false --? Puede conquistar sin policías en servicio
 
-Config.NPCspawn = true
+Config.NPCspawn = false
 Config.pedModel = 's_m_y_cop_01'
+
+Config.conquerKey = 38 --? Tecla para conquistar la zona
 
 Config.Size = { --? Tamaño de la zona
     x = 100,
