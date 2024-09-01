@@ -43,18 +43,20 @@ CreateThread(function()
                         Wait(0)
                     end
     
-                    if ESX.PlayerData.job.label == ownerOfMedusa then
-                    else
-                        local ConquerCode = -1 -- -1= default 1= conflict 2 = success
-    
-                        RegisterNetEvent('receiveConquerCode')
+                    if ESX.PlayerData.job.label ~= ownerOfMedusa then
+                        local ConquerCode = -1 -- -1= default 1= conflict 2 = success 3 = already conquering
+                        TriggerServerEvent('conquerMedusa') -- lanza al servidor el evento de conquistar Medusa
+                        RegisterNetEvent('receiveConquerCode') -- recibe el código de conquista
                         AddEventHandler('receiveConquerCode', function(code)
                             ConquerCode = code
                         end) 
+
+                        print('ConquerCode: ' .. ConquerCode)
                         
+
                         if ConquerCode == 1 then
                             ESX.ShowNotification('~r~Elimina primero a las fuerzas enemigas de la zona')
-                        else
+                        elseif ConquerCode == 2 then
                             ESX.ShowNotification('~g~Has comenzado a conquistar la zona Medusa')
                             isCountingDown = true
                         end

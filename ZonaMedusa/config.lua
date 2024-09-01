@@ -4,7 +4,8 @@ Config.Lenguage = 'en'
 Config.location = vector3(1748.0743, 3268.5168, 41.2383)
 
 Config.allowedJobs = {
-    'police'
+    'police',
+    'mechanic'
 }
 
 Config.NPCspawn = true

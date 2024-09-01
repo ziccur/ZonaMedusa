@@ -2,6 +2,7 @@ local ownerOfMedusa = Config.defaultOwner
 local playersOnMedusa = {}
 local isCountingDown = false
 
+
 AddEventHandler('playerDropped', function()
     local _source = source
     playersOnMedusa[_source] = nil
@@ -33,7 +34,6 @@ if Config.NPCspawn then
 
     netIdTable = {}
 
-
     ped = CreatePed(0, pedModel, pedCoords.x, pedCoords.y, pedCoords.z, 100, true, true)
     netIdTable[1]= NetworkGetNetworkIdFromEntity(ped)
     TriggerClientEvent('esx_banking:pedHandler', -1, netIdTable)
@@ -47,13 +47,14 @@ AddEventHandler('conquerMedusa', function()
     local job = xPlayer.job.name
     local conflict = false
 
-    for i = 1, playersOnMedusa do
-        jugador = ESX.GetPlayerFromId(playersOnMedusa[i])
-        if jugador.job.name ~= job then
+    for i = 1, #playersOnMedusa do
+        if xPlayer.job.name ~= job then
             conflict = true
             break
         end
     end
+
+    print('conflict: ' .. tostring(conflict))
 
     if conflict then
         TriggerClientEvent('receiveConquerCode', _source, 1)
