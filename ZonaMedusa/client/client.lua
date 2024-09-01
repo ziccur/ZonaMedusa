@@ -94,11 +94,15 @@ CreateThread(function()
                 --TODO: Server event to stop conquering
                 isConquering = false
             else --! Dead and not conquering
+
                 if isInside and allowedJob then  --! Dead and was inside zone AND has allowed job
-                    local isInside = false 
+
                     print("ENVIANDO AL SERVIDOR: SALIR DE LA ZONA")
-                   --TODO: Server event to leave zone
+                    --TODO: Server event to leave zone
+                    isInside = false 
+                    
                 end
+                
             end
 
         end
