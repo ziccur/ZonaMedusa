@@ -88,12 +88,19 @@ CreateThread(function()
                 end
 
             else --! Alive and not in zone
-                    isConquering = false
                     if isInside then --! Mark as outside zone
                         ESX.HideUI()
                         isInside = false
                         ESX.ShowNotification('~r~ Has salido de la zona Medusa')
                         if allowedJob() then --! Alive, just leave zone and allowed job
+
+                            if isConquering then --! Alive, just leave zone, allowed job and was conquering
+                                print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
+                                --TODO: Server event to stop conquering
+                                isConquering = false
+                                wantToConquer = false
+                            end
+
                             print("ENVIANDO AL SERVIDOR: SALIR DE LA ZONA")
                             --TODO: Server event to leave zone
                         end
@@ -106,6 +113,7 @@ CreateThread(function()
                 print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
                 --TODO: Server event to stop conquering
                 isConquering = false
+                wantToConquer = false
             else --! Dead and not conquering
 
                 if isInside and allowedJob then  --! Dead and was inside zone AND has allowed job
