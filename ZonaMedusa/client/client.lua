@@ -14,14 +14,15 @@ function inZone()
 end
 
 function conquer()
+    local areOtherConquering = false --! TEMPORAL
     --areOtherConquering = --TODO: Server event to check if other players are conquering
     print("ENVIANDO AL SERVIDOR: CHEQUEAR SI OTROS JUGADORES ESTÁN CONQUISTANDO")
-
+    
     if areOtherConquering then --! Alive, in zone, allowed job and other players are conquering
 
         ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
         print('Hay otros jugadores conquistando la zona')
-        return
+        return false
 
     else --! Alive, in zone, allowed job and no one is conquering
 
@@ -29,7 +30,7 @@ function conquer()
         print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
         --TODO: Server event to start conquering
         ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
-
+        return true
     end
     
 end
@@ -41,8 +42,7 @@ local location = Config.location
 local defaultOwner = Config.defaultOwner
 local isConquering = false
 local isInside = false
-local areOtherConquering = false
-
+local wantToConquer = false
 
 CreateThread(function()
     while true do
@@ -67,27 +67,20 @@ CreateThread(function()
                 if allowedJob() then --! Alive, in zone and allowed job
 
                     if not isConquering then --! Alive, in zone, allowed job and already conquering
-
                         CreateThread(function() --! CHECK E KEY FOR CONQUER
-                            while true do
-                                while not IsControlPressed(0, Config.conquerKey) do 
-                                    Wait(0)
-                                end
-                                if inZone() and not isConquering then
-                                    isConquering = true
-                                    conquer()
-                                    break
-                                end
+                            while not IsControlPressed(0, Config.conquerKey) do 
                                 Wait(0)
-                                break
                             end
+                            wantToConquer = true
                         end)
 
-                    end
 
-                    
-                    
-                    
+                        if wantToConquer then --! Alive, in zone, allowed job and pressing keys
+                            if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
+                                isConquering = conquer()
+                            end
+                        end
+                    end
 
                 else --! Alive, in zone and not allowed job
                     ESX.TextUI('~r~ No tienes permiso para conquistar la zona')
