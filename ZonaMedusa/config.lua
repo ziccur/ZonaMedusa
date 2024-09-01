@@ -5,8 +5,10 @@ Config.location = vector3(1748.0743, 3268.5168, 41.2383)
 
 Config.allowedJobs = {
     'police',
-    'mechanic'
 }
+
+Config.canConquerWithOthersOnZone = false --? Puede conquistar con otros jugadores en la zona
+Config.canConquerWithoutPolice = false --? Puede conquistar sin policías en servicio
 
 Config.NPCspawn = true
 Config.pedModel = 's_m_y_cop_01'
