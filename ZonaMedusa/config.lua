@@ -5,6 +5,7 @@ Config.location = vector3(1748.0743, 3268.5168, 41.2383)
 
 Config.allowedJobs = {
     'police',
+    'ambulance'
 }
 
 Config.canConquerWithOthersOnZone = false --? Puede conquistar con otros jugadores en la zona
@@ -39,5 +40,5 @@ Config.BlipSprite = 429 --? Icono del blip (icono de la policía)
 Config.BlipAlpha = 50 --? Opacidad del blip
 Config.range = 100.0 --? Rango del blip
 
-Config.defaultOwner = 'LSPD'
+Config.defaultOwner = 'Nobody' --? Dueño por defecto de la zona
 

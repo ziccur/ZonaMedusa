@@ -35,14 +35,42 @@ function conquer()
     
 end
 
+function createBlip()
+
+    location = Config.location
+    ownerOfMedusa = Config.defaultOwner
+
+    -- Crear el blip principal en las coordenadas especificadas
+    local blip = AddBlipForCoord(location.x, location.y, location.z)
+    SetBlipSprite(blip, Config.BlipSprite)
+    SetBlipScale(blip, 1.0)
+    SetBlipColour(blip, Config.BlipColour)
+    SetBlipAsShortRange(blip, true)
+
+    -- Configurar el nombre del blip
+    BeginTextCommandSetBlipName('STRING')
+    AddTextComponentString('Zona Medusa - ' .. ownerOfMedusa)
+    EndTextCommandSetBlipName(blip)
+
+    -- Crear el blip de radio (zona)
+    local blipRadius = AddBlipForRadius(location.x, location.y, location.z, Config.range)
+    SetBlipColour(blipRadius, 1) 
+    SetBlipAlpha(blipRadius, 50)
+end
 
 --! -------------------------------------------------------------------------------------------------------------------------------------------------
 
+--! VARIABLES
+
 local location = Config.location
-local defaultOwner = Config.defaultOwner
+local ownerOfMedusa = Config.defaultOwner
 local isConquering = false
 local isInside = false
 local wantToConquer = false
+createBlip()
+
+--! 
+
 
 CreateThread(function()
     while true do
@@ -79,6 +107,7 @@ CreateThread(function()
                             if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
                                 isConquering = conquer()
                             end
+
                         end
                     end
 
@@ -130,3 +159,4 @@ CreateThread(function()
 
     end
 end)
+
