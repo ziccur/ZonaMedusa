@@ -1,3 +1,15 @@
+
+--! VARIABLES
+
+local location = Config.location
+local ownerOfMedusa = Config.defaultOwner
+local isConquering = false
+local isInside = false
+local wantToConquer = false
+local blip = nil
+local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
+
+
 function allowedJob()
     for i = 1, #Config.allowedJobs do
         if ESX.PlayerData.job.name == Config.allowedJobs[i] then
@@ -19,29 +31,27 @@ function conquer()
     print("ENVIANDO AL SERVIDOR: CHEQUEAR SI OTROS JUGADORES ESTÁN CONQUISTANDO")
     
     if areOtherConquering then --! Alive, in zone, allowed job and other players are conquering
-
         ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
         print('Hay otros jugadores conquistando la zona')
         return false
-
     else --! Alive, in zone, allowed job and no one is conquering
-
         isConquering = true 
         print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
         --TODO: Server event to start conquering
+        print("Cambiando dueño de ".. ownerOfMedusa .. " a: " .. ESX.PlayerData.job.label)
+        ownerOfMedusa = ESX.PlayerData.job.label
+        print("Nuevo dueño: " .. ownerOfMedusa)
         ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
         return true
     end
-    
 end
 
 function createBlip()
 
     location = Config.location
-    ownerOfMedusa = Config.defaultOwner
 
     -- Crear el blip principal en las coordenadas especificadas
-    local blip = AddBlipForCoord(location.x, location.y, location.z)
+    blip = AddBlipForCoord(location.x, location.y, location.z)
     SetBlipSprite(blip, Config.BlipSprite)
     SetBlipScale(blip, 1.0)
     SetBlipColour(blip, Config.BlipColour)
@@ -54,19 +64,13 @@ function createBlip()
 
     -- Crear el blip de radio (zona)
     local blipRadius = AddBlipForRadius(location.x, location.y, location.z, Config.range)
-    SetBlipColour(blipRadius, 1) 
+    SetBlipColour(blipRadius, 1)
     SetBlipAlpha(blipRadius, 50)
 end
 
 --! -------------------------------------------------------------------------------------------------------------------------------------------------
 
---! VARIABLES
 
-local location = Config.location
-local ownerOfMedusa = Config.defaultOwner
-local isConquering = false
-local isInside = false
-local wantToConquer = false
 createBlip()
 
 --! 
@@ -134,6 +138,15 @@ CreateThread(function()
                             --TODO: Server event to leave zone
                         end
                     end
+            end
+
+            if ownerOfMedusa ~= ownerOfMedusaShowed then --! Update blip name only if player is alive and owner changed
+                
+                print("Preparado para cambiar a ".. ownerOfMedusa)
+                BeginTextCommandSetBlipName('STRING')
+                AddTextComponentString('Zona Medusa - ' .. ownerOfMedusa)
+                EndTextCommandSetBlipName(blip)
+                ownerOfMedusaShowed = ownerOfMedusa
             end
             
         else --! Dead case
