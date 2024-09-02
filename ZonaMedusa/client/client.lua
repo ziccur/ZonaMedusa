@@ -8,14 +8,20 @@ local isInside = false
 local wantToConquer = false
 local blip = nil
 local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
+local areOthers = false
 
-
+--! Recive Owner of Medusa <- server
 RegisterNetEvent('receiveOwnerOfMedusa')
 AddEventHandler('receiveOwnerOfMedusa', function(ownerOfMedusaServer)
     ownerOfMedusa = ownerOfMedusaServer
     print("Recibido dueño de Medusa: " .. ownerOfMedusa .. " - " .. ownerOfMedusaServer)
 end)
 
+--! Recive if are others in zone
+RegisterNetEvent('receiveAreOthers')
+AddEventHandler('receiveAreOthers', function(areOthersServer)
+    areOthers = areOthersServer
+end)
 
 function allowedJob()
     for i = 1, #Config.allowedJobs do
@@ -33,21 +39,19 @@ function inZone()
 end
 
 function conquer()
-    local areOtherConquering = false --! TEMPORAL
-    --areOtherConquering = --TODO: Server event to check if other players are conquering
-    print("ENVIANDO AL SERVIDOR: CHEQUEAR SI OTROS JUGADORES ESTÁN CONQUISTANDO")
+     
     
-    if areOtherConquering then --! Alive, in zone, allowed job and other players are conquering
+
+    TriggerServerEvent('getOwnerOfMedusa')
+
+    if areOthers then --! Alive, in zone, allowed job, and others on zone
         ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
         print('Hay otros jugadores conquistando la zona')
         return false
     else --! Alive, in zone, allowed job and no one is conquering
         isConquering = true 
-        print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
         TriggerServerEvent('conquerZone')
-        print("Cambiando dueño de ".. ownerOfMedusa .. " a: " .. ESX.PlayerData.job.label)
         ownerOfMedusa = ESX.PlayerData.job.label
-        print("Nuevo dueño: " .. ownerOfMedusa)
         ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
         return true
     end

@@ -58,3 +58,17 @@ AddEventHandler('conquerZone', function()
     isCountingDown = true
     ownerOfMedusa = ESX.GetPlayerFromId(_source).job.label
 end)
+
+--! return if are others in zone
+RegisterNetEvent('getAreOthers')
+AddEventHandler('getAreOthers', function()
+    local _source = source
+    job = ESX.GetPlayerFromId(_source).job.label
+
+    for i, _ in pairs(playersOnMedusa) do
+        if ESX.GetPlayerFromId(i).job.label ~= job then
+            TriggerClientEvent('receiveAreOthers', _source, true)
+        end
+    end
+    TriggerClientEvent('receiveAreOthers', _source, false)
+end)
