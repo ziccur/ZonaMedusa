@@ -1,25 +1,28 @@
 local ownerOfMedusa = Config.defaultOwner
 local playersOnMedusa = {}
 local isCountingDown = false
+ESX = exports["es_extended"]:getSharedObject()
 
-
-AddEventHandler('playerDropped', function()
+--! player disconnect
+AddEventHandler('playerDropped', function() 
     local _source = source
     playersOnMedusa[_source] = nil
 end)
 
+--! player enter zone
 RegisterServerEvent('ZonaMedusa:playerEnteredZone')
-AddEventHandler('ZonaMedusa:playerEnteredZone', function()
+AddEventHandler('ZonaMedusa:playerEnteredZone', function() 
     local _source = source
     playersOnMedusa[_source] = true
 end)
 
+--! player leave zone
 RegisterServerEvent('ZonaMedusa:playerLeftZone')
 AddEventHandler('ZonaMedusa:playerLeftZone', function()
     local _source = source
     playersOnMedusa[_source] = nil
 end)
-
+--! player disconnect
 RegisterNetEvent('ZonaMedusa:playerDisconnecting')
 AddEventHandler('ZonaMedusa:playerDisconnecting', function(reason)
     local source = source
@@ -28,6 +31,7 @@ AddEventHandler('ZonaMedusa:playerDisconnecting', function(reason)
     end
 end)
 
+--! NPC spawn ped
 if Config.NPCspawn then
     local pedCoords = Config.location
     local pedModel = Config.pedModel
@@ -40,34 +44,17 @@ if Config.NPCspawn then
 
 end
 
-RegisterNetEvent('conquerMedusa')
-AddEventHandler('conquerMedusa', function()
-    local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
-    local job = xPlayer.job.name
-    local conflict = false
-
-    for i = 1, #playersOnMedusa do
-        if xPlayer.job.name ~= job then
-            conflict = true
-            break
-        end
-    end
-
-    print('conflict: ' .. tostring(conflict))
-
-    if conflict then
-        TriggerClientEvent('receiveConquerCode', _source, 1)
-    else
-        TriggerClientEvent('receiveConquerCode', _source, 2)
-    end
-
-end)
-
-
-
+--! return owner of medusa
 RegisterNetEvent('getOwnerOfMedusa')
 AddEventHandler('getOwnerOfMedusa', function()
     local _source = source
     TriggerClientEvent('receiveOwnerOfMedusa', _source, ownerOfMedusa)
+end)
+
+--! player conquer zone
+RegisterNetEvent('conquerZone')
+AddEventHandler('conquerZone', function()
+    local _source = source
+    isCountingDown = true
+    ownerOfMedusa = ESX.GetPlayerFromId(_source).job.label
 end)

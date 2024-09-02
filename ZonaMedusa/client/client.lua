@@ -2,12 +2,19 @@
 --! VARIABLES
 
 local location = Config.location
-local ownerOfMedusa = Config.defaultOwner
+local ownerOfMedusa = "ERROR" --! if server-client error communication
 local isConquering = false
 local isInside = false
 local wantToConquer = false
 local blip = nil
 local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
+
+
+RegisterNetEvent('receiveOwnerOfMedusa')
+AddEventHandler('receiveOwnerOfMedusa', function(ownerOfMedusaServer)
+    ownerOfMedusa = ownerOfMedusaServer
+    print("Recibido dueño de Medusa: " .. ownerOfMedusa .. " - " .. ownerOfMedusaServer)
+end)
 
 
 function allowedJob()
@@ -37,7 +44,7 @@ function conquer()
     else --! Alive, in zone, allowed job and no one is conquering
         isConquering = true 
         print("ENVIANDO AL SERVIDOR: COMENZAR A CONQUISTAR")
-        --TODO: Server event to start conquering
+        TriggerServerEvent('conquerZone')
         print("Cambiando dueño de ".. ownerOfMedusa .. " a: " .. ESX.PlayerData.job.label)
         ownerOfMedusa = ESX.PlayerData.job.label
         print("Nuevo dueño: " .. ownerOfMedusa)
@@ -48,6 +55,7 @@ end
 
 function createBlip()
 
+    TriggerServerEvent('getOwnerOfMedusa')
     location = Config.location
 
     -- Crear el blip principal en las coordenadas especificadas
@@ -79,6 +87,8 @@ createBlip()
 CreateThread(function()
     while true do
         Wait(1000)
+
+        TriggerServerEvent('getOwnerOfMedusa')
         local playerPed = PlayerPedId()
 
         if not IsEntityDead(playerPed) then --! Alive case
