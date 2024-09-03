@@ -9,6 +9,8 @@ local wantToConquer = false
 local blip = nil
 local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
 local areOthers = false
+local time = Config.timeToConquer
+local isCountingDown = false
 
 --! Recive Owner of Medusa <- server
 RegisterNetEvent('receiveOwnerOfMedusa')
@@ -134,6 +136,23 @@ CreateThread(function()
                     print('No tienes permiso para conquistar la zona')
                 end
 
+                if isConquering and not isCountingDown  then --! Alive, in zone and conquering
+                    CreateThread(function() --! CONQUER COUNTDOWN
+                        isCountingDown = true
+                        while time > 0 and isConquering do
+                            Wait(1000)
+                            SetTextComponentFormat("STRING")
+                            print(time)
+                            AddTextComponentString("Mantente en zona medusa para conquistarla - Tiempo restante: " .. time)
+                            DisplayHelpTextFromStringLabel(0, 0, 1, 1000)
+                            time = time - 1
+                        end
+                        time = Config.conquerTime
+                        isConquering = false
+                    end)
+                end
+
+
             else --! Alive and not in zone
                     if isInside then --! Mark as outside zone
                         ESX.HideUI()
@@ -144,6 +163,7 @@ CreateThread(function()
                             if isConquering then --! Alive, just leave zone, allowed job and was conquering
                                 print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
                                 --TODO: Server event to stop conquering
+
                                 isConquering = false
                                 wantToConquer = false
                             end

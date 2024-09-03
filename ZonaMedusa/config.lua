@@ -22,7 +22,7 @@ Config.Size = { --? Tamaño de la zona
     z = 100
 }
 
-Config.timeToConquer = 10 --? Tiempo en segundos para conquistar la zona
+Config.timeToConquer = 60 --? Tiempo en segundos para conquistar la zona
 Config.timeToReward = 300 --? Cada cuantos segundos dar la recompensa 
 
 Config.rewardGangs = {
