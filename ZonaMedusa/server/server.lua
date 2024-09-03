@@ -13,14 +13,17 @@ end)
 RegisterServerEvent('ZonaMedusa:playerEnteredZone')
 AddEventHandler('ZonaMedusa:playerEnteredZone', function() 
     local _source = source
-    playersOnMedusa[_source] = true
+    print(_source)
+    table.insert(playersOnMedusa, _source)
+    print("Jugadores en medusa: " .. json.encode(playersOnMedusa))
 end)
 
 --! player leave zone
 RegisterServerEvent('ZonaMedusa:playerLeftZone')
 AddEventHandler('ZonaMedusa:playerLeftZone', function()
     local _source = source
-    playersOnMedusa[_source] = nil
+    table.remove(playersOnMedusa, _source)
+    print("Jugadores en medusa: " .. json.encode(playersOnMedusa))
 end)
 --! player disconnect
 RegisterNetEvent('ZonaMedusa:playerDisconnecting')
@@ -72,3 +75,4 @@ AddEventHandler('getAreOthers', function()
     end
     TriggerClientEvent('receiveAreOthers', _source, false)
 end)
+

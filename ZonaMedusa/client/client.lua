@@ -104,7 +104,7 @@ CreateThread(function()
                     ESX.ShowNotification('~g~ Has entrado a la zona Medusa')
                     
                     if allowedJob() then --! Alive, in zone and allowed job
-                        print("ENVIANDO AL SERVIDOR: ENTRAR A LA ZONA")
+                        TriggerServerEvent("ZonaMedusa:playerEnteredZone")
                         --TODO: Server event to enter zone
                     end
 
@@ -148,7 +148,7 @@ CreateThread(function()
                                 wantToConquer = false
                             end
 
-                            print("ENVIANDO AL SERVIDOR: SALIR DE LA ZONA")
+                            TriggerServerEvent("ZonaMedusa:playerLeftZone")
                             --TODO: Server event to leave zone
                         end
                     end
@@ -174,7 +174,7 @@ CreateThread(function()
 
                 if isInside and allowedJob then  --! Dead and was inside zone AND has allowed job
 
-                    print("ENVIANDO AL SERVIDOR: SALIR DE LA ZONA")
+                    TriggerServerEvent("ZonaMedusa:playerLeftZone")
                     --TODO: Server event to leave zone
                     isInside = false 
                     
