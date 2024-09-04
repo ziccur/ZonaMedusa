@@ -3,10 +3,11 @@ local playersOnMedusa = {}
 local isCountingDown = false
 ESX = exports["es_extended"]:getSharedObject()
 
---! player disconnect
+--! player crash client
 AddEventHandler('playerDropped', function() 
+    print("ID del crash: ".. _source)
     local _source = source
-    playersOnMedusa[_source] = nil
+    table.remove(playersOnMedusa, _source)
 end)
 
 --! player enter zone
@@ -54,6 +55,7 @@ AddEventHandler('getOwnerOfMedusa', function()
     TriggerClientEvent('receiveOwnerOfMedusa', _source, ownerOfMedusa)
 end)
 
+
 --! player conquer zone
 RegisterNetEvent('conquerZone')
 AddEventHandler('conquerZone', function()
@@ -75,4 +77,12 @@ AddEventHandler('getAreOthers', function()
     end
     TriggerClientEvent('receiveAreOthers', _source, false)
 end)
+
+--! event conquer zone
+RegisterNetEvent('conquerZone')
+AddEventHandler('conquerZone', function()
+    local _source = source
+
+end)
+
 

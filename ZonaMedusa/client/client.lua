@@ -49,7 +49,6 @@ function conquer()
         return false
     else --! Alive, in zone, allowed job and no one is conquering
         isConquering = true 
-        TriggerServerEvent('conquerZone')
         ownerOfMedusa = ESX.PlayerData.job.label
         ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
         return true
@@ -138,7 +137,7 @@ CreateThread(function()
                 if isConquering and not isCountingDown  then --! Alive, in zone and conquering
                     CreateThread(function() --! CONQUER COUNTDOWN
                         isCountingDown = true
-                        while time > 0 and isConquering do
+                        while isConquering and time ~= nill and time > 0 do
                             Wait(1000)
                             SetTextComponentFormat("STRING")
                             print(time)
@@ -146,9 +145,14 @@ CreateThread(function()
                             DisplayHelpTextFromStringLabel(0, 0, 1, 1000)
                             time = time - 1
                         end
-                        time = Config.conquerTime
+                        if time ~= nill and time <= 0 then
+                            ESX.ShowNotification('~g~ Has conquistado la zona Medusa')
+                            TriggerServerEvent("conquerZone")
+                        end
+                        time = Config.timeToConquer
                         isConquering = false
                         isCountingDown = false
+                        wantToConquer = false
                     end)
                 end
 
