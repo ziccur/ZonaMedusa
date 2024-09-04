@@ -64,6 +64,19 @@ AddEventHandler('conquerZone', function()
     ownerOfMedusa = ESX.GetPlayerFromId(_source).job.label
 end)
 
+--! get countdown
+RegisterNetEvent('getCountingDown')
+AddEventHandler('getCountingDown', function()
+    local _source = source
+    TriggerClientEvent('receiveOtherConquering', _source, isCountingDown)
+end)
+
+--! stop counting down
+RegisterNetEvent('stopCountingDown')
+AddEventHandler('stopCountingDown', function()
+    isCountingDown = false
+end)
+
 --! return if are others in zone
 RegisterNetEvent('getAreOthers')
 AddEventHandler('getAreOthers', function()
