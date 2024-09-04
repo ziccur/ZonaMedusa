@@ -11,7 +11,7 @@ local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
 local areOthers = false
 local time = Config.timeToConquer
 local isCountingDown = false
-local otherConquering = false
+local otherConquering = true
 
 --! Recive Owner of Medusa <- server
 RegisterNetEvent('receiveOwnerOfMedusa')
@@ -69,7 +69,7 @@ function conquer()
 end
 
 function createBlip()
-
+    TriggerServerEvent("getCountingDown")
     TriggerServerEvent('getOwnerOfMedusa')
     location = Config.location
 
