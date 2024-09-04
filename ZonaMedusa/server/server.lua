@@ -75,6 +75,7 @@ end)
 RegisterNetEvent('stopCountingDown')
 AddEventHandler('stopCountingDown', function()
     isCountingDown = false
+    giveRewards('legal', source, playersOnMedusa)
 end)
 
 --! return if are others in zone
@@ -98,4 +99,39 @@ AddEventHandler('conquerZone', function()
 
 end)
 
+--! ---------------------------------------------------------------
+--! ----------------------  Functions  ------------------------------
+--! ---------------------------------------------------------------
+
+function giveRewards(typeofJob, source, listOfPlayersToReward) --! typeofJob = 'legal' or 'ilegal'
+    if ownerOfMedusa ~= Config.defaultOwner then
+
+        for i, _ in pairs(listOfPlayersToReward) do
+            TriggerClientEvent('esx:showNotification', i, 'Has recibido tu recompensa por conquistar la zona')
+
+            local rewards = Config[typeofJob .. 'Reward']
+
+            for k, v in pairs(rewards) do
+                print('Dando recompensa a ' .. i .. ' de ' .. k .. ' con ' .. v)
+                giveItemToPlayer(i, k, v)
+            end
+        end
+    end
+end
+
+function giveItemToPlayer(player, item, amount)
+    if item == 'money' then
+        ESX.GetPlayerFromId(player).addMoney(amount)
+    elseif item == 'bank' then
+        ESX.GetPlayerFromId(player).addAccountMoney('bank', amount)
+    else 
+        ESX.GetPlayerFromId(player).addInventoryItem(item, amount)
+    end
+end
+
+--! ---------------------------------------------------------------
+--! ----------------------  Threads  ------------------------------
+--! ---------------------------------------------------------------
+
+--! Thread to give rewards
 

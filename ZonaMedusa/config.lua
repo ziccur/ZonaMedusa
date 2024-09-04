@@ -30,11 +30,14 @@ Config.timeToReward = 300 --? Time to reward the zone (seconds)
 Config.ilegalReward = {
     cocaine_bag = 1,
     weed_bag = 1,
-    meth_bag = 1,
+    meth_bag = 1
 }
 
 Config.legalReward = {
+    --? You can use "money", "bank" or "item" as reward
     money = 1000,
+    bank = 1000,
+    diamond = 1
 }
 
 Config.BlipColour = 1 --? Color del blip (rojo)
