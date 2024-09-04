@@ -11,6 +11,7 @@ local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
 local areOthers = false
 local time = Config.timeToConquer
 local isCountingDown = false
+local otherConquering = false
 
 --! Recive Owner of Medusa <- server
 RegisterNetEvent('receiveOwnerOfMedusa')
@@ -22,6 +23,13 @@ end)
 RegisterNetEvent('receiveAreOthers')
 AddEventHandler('receiveAreOthers', function(areOthersServer)
     areOthers = areOthersServer
+end)
+
+--! Recive if are others conquering
+RegisterNetEvent('receiveOtherConquering')
+AddEventHandler('receiveOtherConquering', function(otherConqueringServer)
+    print("Recibido: " .. tostring(otherConqueringServer))
+    otherConquering = otherConqueringServer
 end)
 
 function allowedJob()
@@ -45,13 +53,18 @@ function conquer()
 
     if areOthers then --! Alive, in zone, allowed job, and others on zone
         ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
-        print('Hay otros jugadores conquistando la zona')
         return false
-    else --! Alive, in zone, allowed job and no one is conquering
-        isConquering = true 
-        ownerOfMedusa = ESX.PlayerData.job.label
-        ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
-        return true
+    else --! Alive, in zone, allowed job and no one is 
+
+        if otherConquering then
+            ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
+            return false
+        else
+            isConquering = true
+            ownerOfMedusa = ESX.PlayerData.job.label
+            ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
+            return true
+        end
     end
 end
 
@@ -117,10 +130,20 @@ CreateThread(function()
                             wantToConquer = true
                         end)
 
+                        if ownerOfMedusa == ESX.PlayerData.job.label  and wantToConquer then --! Alive, in zone, allowed job and pressing keys and already owner
+                            ESX.ShowNotification('~r~ Ya eres dueño de la zona Medusa')
+                            wantToConquer = false
+                        end
 
                         if wantToConquer then --! Alive, in zone, allowed job and pressing keys
                             if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
-                                isConquering = conquer()
+                                TriggerServerEvent('getCountingDown')
+                                print("Recibido en cliente: " .. tostring(otherConquering))
+                                if not otherConquering then
+                                    isConquering = conquer()
+                                else
+                                    ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
+                                end
                                 if not isConquering then
                                     wantToConquer = false
                                 end
@@ -131,7 +154,6 @@ CreateThread(function()
 
                 else --! Alive, in zone and not allowed job
                     ESX.TextUI('~r~ No tienes permiso para conquistar la zona')
-                    print('No tienes permiso para conquistar la zona')
                 end
 
                 if isConquering and not isCountingDown  then --! Alive, in zone and conquering
@@ -140,7 +162,6 @@ CreateThread(function()
                         while isConquering and time ~= nill and time > 0 do
                             Wait(1000)
                             SetTextComponentFormat("STRING")
-                            print(time)
                             AddTextComponentString("Mantente en zona medusa para conquistarla - Tiempo restante: " .. time)
                             DisplayHelpTextFromStringLabel(0, 0, 1, 1000)
                             time = time - 1
@@ -148,6 +169,7 @@ CreateThread(function()
                         if time ~= nill and time <= 0 then
                             ESX.ShowNotification('~g~ Has conquistado la zona Medusa')
                             TriggerServerEvent("conquerZone")
+                            TriggerServerEvent("stopCountingDown")
                         end
                         time = Config.timeToConquer
                         isConquering = false
@@ -166,8 +188,7 @@ CreateThread(function()
 
                             if isConquering then --! Alive, just leave zone, allowed job and was conquering
                                 print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
-                                --TODO: Server event to stop conquering
-
+                                TriggerServerEvent("stopCountingDown")
                                 isConquering = false
                                 wantToConquer = false
                             end
@@ -188,7 +209,7 @@ CreateThread(function()
 
             if isConquering then --! Dead while conquering
                 print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
-                --TODO: Server event to stop conquering
+                TriggerServerEvent("stopCountingDown")
                 isConquering = false
                 wantToConquer = false
             else --! Dead and not conquering
