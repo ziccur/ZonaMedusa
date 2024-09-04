@@ -16,7 +16,6 @@ local isCountingDown = false
 RegisterNetEvent('receiveOwnerOfMedusa')
 AddEventHandler('receiveOwnerOfMedusa', function(ownerOfMedusaServer)
     ownerOfMedusa = ownerOfMedusaServer
-    print("Recibido dueño de Medusa: " .. ownerOfMedusa .. " - " .. ownerOfMedusaServer)
 end)
 
 --! Recive if are others in zone
@@ -42,8 +41,6 @@ end
 
 function conquer()
      
-    
-
     TriggerServerEvent('getOwnerOfMedusa')
 
     if areOthers then --! Alive, in zone, allowed job, and others on zone
@@ -107,7 +104,6 @@ CreateThread(function()
                     
                     if allowedJob() then --! Alive, in zone and allowed job
                         TriggerServerEvent("ZonaMedusa:playerEnteredZone")
-                        --TODO: Server event to enter zone
                     end
 
                 end
@@ -126,6 +122,9 @@ CreateThread(function()
                         if wantToConquer then --! Alive, in zone, allowed job and pressing keys
                             if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
                                 isConquering = conquer()
+                                if not isConquering then
+                                    wantToConquer = false
+                                end
                             end
 
                         end
@@ -149,6 +148,7 @@ CreateThread(function()
                         end
                         time = Config.conquerTime
                         isConquering = false
+                        isCountingDown = false
                     end)
                 end
 
@@ -169,14 +169,11 @@ CreateThread(function()
                             end
 
                             TriggerServerEvent("ZonaMedusa:playerLeftZone")
-                            --TODO: Server event to leave zone
                         end
                     end
             end
 
-            if ownerOfMedusa ~= ownerOfMedusaShowed then --! Update blip name only if player is alive and owner changed
-                
-                print("Preparado para cambiar a ".. ownerOfMedusa)
+            if ownerOfMedusa ~= ownerOfMedusaShowed then --! Update blip name only if player is alive and owner changed                
                 BeginTextCommandSetBlipName('STRING')
                 AddTextComponentString('Zona Medusa - ' .. ownerOfMedusa)
                 EndTextCommandSetBlipName(blip)
@@ -195,7 +192,6 @@ CreateThread(function()
                 if isInside and allowedJob then  --! Dead and was inside zone AND has allowed job
 
                     TriggerServerEvent("ZonaMedusa:playerLeftZone")
-                    --TODO: Server event to leave zone
                     isInside = false 
                     
                 end
