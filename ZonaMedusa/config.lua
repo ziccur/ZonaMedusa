@@ -8,8 +8,10 @@ Config.allowedJobs = {
     'ambulance'
 }
 
-Config.canConquerWithOthersOnZone = false --? Puede conquistar con otros jugadores en la zona
-Config.canConquerWithoutPolice = false --? Puede conquistar sin policías en servicio
+Config.allowedIllegalJobs = {
+    'mafia',
+    'cartel'
+}
 
 Config.NPCspawn = false
 Config.pedModel = 's_m_y_cop_01'
@@ -22,16 +24,16 @@ Config.Size = { --? Tamaño de la zona
     z = 100
 }
 
-Config.timeToConquer = 60 --? Tiempo en segundos para conquistar la zona
-Config.timeToReward = 300 --? Cada cuantos segundos dar la recompensa 
+Config.timeToConquer = 10 --? Time to conquer the zone (seconds)
+Config.timeToReward = 300 --? Time to reward the zone (seconds)
 
-Config.rewardGangs = {
+Config.ilegalReward = {
     cocaine_bag = 1,
     weed_bag = 1,
     meth_bag = 1,
 }
 
-Config.rewardPolice = {
+Config.legalReward = {
     money = 1000,
 }
 

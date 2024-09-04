@@ -38,6 +38,13 @@ function allowedJob()
             return true
         end
     end
+
+    for i = 1, #Config.allowedIllegalJobs do
+        if ESX.PlayerData.job.name == Config.allowedIllegalJobs[i] then
+            return true
+        end
+    end
+    
     return false
 end
 
