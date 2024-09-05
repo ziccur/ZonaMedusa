@@ -179,7 +179,6 @@ function giveRewards(typeofJob, source, listOfPlayersToReward) --! typeofJob = '
             local rewards = Config[typeofJob .. 'Reward']
 
             for k, v in pairs(rewards) do
-                print('Dando recompensa a ' .. i .. ' de ' .. k .. ' con ' .. v)
                 giveItemToPlayer(i, k, v)
             end
         end

@@ -28,7 +28,6 @@ end)
 --! Recive if are others conquering
 RegisterNetEvent('receiveOtherConquering')
 AddEventHandler('receiveOtherConquering', function(otherConqueringServer)
-    print("Recibido: " .. tostring(otherConqueringServer))
     otherConquering = otherConqueringServer
 end)
 
@@ -145,7 +144,6 @@ CreateThread(function()
                         if wantToConquer then --! Alive, in zone, allowed job and pressing keys
                             if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
                                 TriggerServerEvent('getCountingDown')
-                                print("Recibido en cliente: " .. tostring(otherConquering))
                                 if not otherConquering then
                                     isConquering = conquer()
                                 else
@@ -194,7 +192,6 @@ CreateThread(function()
                         if allowedJob() then --! Alive, just leave zone and allowed job
 
                             if isConquering then --! Alive, just leave zone, allowed job and was conquering
-                                print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
                                 TriggerServerEvent("stopCountingDown")
                                 isConquering = false
                                 wantToConquer = false
@@ -215,7 +212,6 @@ CreateThread(function()
         else --! Dead case
 
             if isConquering then --! Dead while conquering
-                print("ENVIANDO AL SERVIDOR: DETENER CONQUISTA")
                 TriggerServerEvent("stopCountingDown")
                 isConquering = false
                 wantToConquer = false
