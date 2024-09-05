@@ -17,10 +17,10 @@
     <br> 
 </p>
 
-## 📝 Table of Contents
+## 📝 Contenidos
 
-- [About](#about)
-- [Getting Started](#getting_started)
+- [Requisitos](#requisitos)
+- [Instalacion](#instalacion)
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
@@ -29,39 +29,32 @@
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
-## 🧐 About <a name = "about"></a>
+## 🧐 Requisitos <a name = "requisitos"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Antes de instalar el script, asegúrate de tener los siguientes requisitos en tu servidor:
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+- ESX o ESX Legacy como framework
+- Los siguientes scripts instalados:
+  - [es_extended](https://github.com/esx-framework/esx_core/tree/main/%5Bcore%5D/es_extended)
+  - [esx_banking](https://github.com/esx-framework/esx_banking) o con las mismas funciones
+  - [esx_jobs](https://github.com/esx-framework/esx_jobs)
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+## 🏁 Instalación <a name = "instalacion"></a>
 
-### Prerequisites
+ Sigue los siguientes pasos para instalar correctamente el script en tu servidor, si quieres saber mas puedes mirar las [notas de desarrollo](#desarollo).
 
-What things you need to install the software and how to install them.
+#### Clona el repositiorio
 
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+Clona el repositorio en tu la carpeta <u> <b> resources</b></u> de tu servidor de FiveM.
 
 ```
-Give the example
+ git clone https://github.com/ziccur/ZonaMedusa.git
 ```
 
-And repeat
+Una vez clonado el repositorio, deberás de añadir el script a tu archivo de configuración de recursos <u> <b> server.cfg </b></u> de tu servidor.
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo.
+
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
