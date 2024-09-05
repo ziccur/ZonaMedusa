@@ -29,7 +29,6 @@ RegisterServerEvent('ZonaMedusa:playerEnteredZone')
 AddEventHandler('ZonaMedusa:playerEnteredZone', function() 
     local _source = source
     table.insert(playersOnMedusa, _source)
-    print("Jugadores en medusa: " .. json.encode(playersOnMedusa))
 end)
 
 --! player leave zone
@@ -37,7 +36,6 @@ RegisterServerEvent('ZonaMedusa:playerLeftZone')
 AddEventHandler('ZonaMedusa:playerLeftZone', function()
     local _source = source
     table.remove(playersOnMedusa, _source)
-    print("Jugadores en medusa: " .. json.encode(playersOnMedusa))
 end)
 --! player disconnect
 RegisterNetEvent('ZonaMedusa:playerDisconnecting')
@@ -149,7 +147,8 @@ function getPlayersToReward()
     local playersToReward = {}
     players = GetPlayers()
 
-    for i, _ in pairs(players) do
+    print("players: " .. json.encode(players))
+    for k, i in pairs(players) do
         if ESX.GetPlayerFromId(i).job.label == ownerOfMedusa then
             table.insert(playersToReward, i)
         end
