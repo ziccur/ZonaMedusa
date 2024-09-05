@@ -129,9 +129,28 @@ function giveItemToPlayer(player, item, amount)
     end
 end
 
---! ---------------------------------------------------------------
---! ----------------------  Threads  ------------------------------
---! ---------------------------------------------------------------
+--! admin command
+-- RegisterCommand: Registers a command that allows changing the owner of the Medusa zone.
+-- Parameters:
+--   - source: The source of the command.
+--   - args: The arguments passed to the command.
+--   - rawCommand: The raw command string.
+-- Returns: None.
 
---! Thread to give rewards
+RegisterCommand('changeOwnerOfMedusa', function(source, args, rawCommand)
+    local player = ESX.GetPlayerFromId(source)
+
+    if player.getGroup() == 'admin' then
+
+        if args[1] == nil then
+            TriggerClientEvent('esx:showNotification', source, 'Debes especificar un dueño para la zona Medusa. Uso: /changeOwnerOfMedusa [nombre]')
+            return
+        end
+
+        ownerOfMedusa = args[1]
+        TriggerClientEvent('esx:showNotification', source, 'Has cambiado el dueño de la zona Medusa a ' .. ownerOfMedusa    )
+    else
+        TriggerClientEvent('esx:showNotification', source, 'No tienes permisos para ejecutar este comando.')
+    end
+end)
 
