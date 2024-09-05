@@ -46,6 +46,7 @@ Config.legalReward = {
 Config.BlipColour = 1 --? Color del blip (rojo)
 Config.BlipSprite = 429 -- https://docs.fivem.net/docs/game-references/blips/
 Config.BlipAlpha = 50 --? Opacidad del blip
+Config.BlipRadius = 100.0 --? Radio del blip
 
 Config.defaultOwner = 'Nobody'
 
