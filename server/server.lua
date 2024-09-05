@@ -75,7 +75,7 @@ end)
 RegisterNetEvent('stopCountingDown')
 AddEventHandler('stopCountingDown', function()
     isCountingDown = false
-    giveRewards('legal', source, playersOnMedusa)
+    getPlayersToReward() 
 end)
 
 --! return if are others in zone
@@ -103,6 +103,37 @@ end)
 --! ----------------------  Functions  ------------------------------
 --! ---------------------------------------------------------------
 
+--[[ 
+    Retrieves a list of players to reward based on their job label.
+
+    @return table playersToReward - A table containing the IDs of players to reward.
+]]
+function getPlayersToReward() 
+    local playersToReward = {}
+    players = GetPlayers()
+
+    for i, _ in pairs(players) do
+        if ESX.GetPlayerFromId(i).job.label == ownerOfMedusa then
+            table.insert(playersToReward, i)
+        end
+    end
+    return playersToReward
+end
+
+
+--[[
+    giveRewards(typeofJob, source, listOfPlayersToReward)
+
+    This function gives rewards to players for conquering a zone.
+
+    Parameters:
+    - typeofJob (string): The type of job, can be either 'legal' or 'ilegal'.
+    - source (number): The source of the event.
+    - listOfPlayersToReward (table): A table containing the list of players to reward.
+
+    Returns:
+    - None
+]]
 function giveRewards(typeofJob, source, listOfPlayersToReward) --! typeofJob = 'legal' or 'ilegal'
     if ownerOfMedusa ~= Config.defaultOwner then
 
@@ -119,6 +150,19 @@ function giveRewards(typeofJob, source, listOfPlayersToReward) --! typeofJob = '
     end
 end
 
+--[[
+    giveItemToPlayer(player, item, amount)
+
+    This function is used to give an item to a player.
+
+    Parameters:
+        - player (number): The player ID.
+        - item (string): The item to give.
+        - amount (number): The amount of the item to give.
+
+    Returns:
+        - None
+]]
 function giveItemToPlayer(player, item, amount)
     if item == 'money' then
         ESX.GetPlayerFromId(player).addMoney(amount)
