@@ -24,7 +24,6 @@
 - [Configuración](#configuracion)
 - [Como usar ZonaMedusa](#uso)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
 - [Deployment](#deployment)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
@@ -85,7 +84,10 @@ Para configurar el script, deberás de modificar el archivo <u> <b> config.lua <
 
 ## 🎈 Como usar ZonaMedusa <a name="uso"></a>
 
-Add notes about how to use the system.
+Desde el lado del jugador aparece en el mapa una zona con un rango que indica el nombre de la zona y quien tiene la posesión de la zona. Así se ve la zona por defecto:
+
+
+
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
