@@ -1,22 +1,19 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
-<h3 align="center">Project Title</h3>
+<h3 align="center">ZonaMedusa</h3>
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![Status](https://img.shields.io/badge/status-active-green?style=for-the-badge&link=https%3A%2F%2Fwww.lua.org)]()      [![Made in](https://img.shields.io/badge/made%20in-lua-blue?style=for-the-badge&link=https%3A%2F%2Fwww.lua.org)](www.lua.org)      [![License](https://img.shields.io/badge/licence-MIT-black?style=for-the-badge&link=%2FLICENCE)](/LICENSE)
+
+<h5> Made for </h5>
+
+[![Server](https://img.shields.io/badge/Server-FiveM-orange?style=for-the-badge)]() [![GAME](https://img.shields.io/badge/Game-%20GTA%20V%20-darkgreen?style=for-the-badge
+)]() [![Framework](https://img.shields.io/badge/Framwork-ESX%20%2F%20ESX%20Legacy-red?style=for-the-badge)]()
 
 </div>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="left"> ZonaMedusa és un script para servidores de <b>FiveM (ESX) </b> que permite tener una zona localizada en el mapa donde los jugadores con un <b>banda o trabajo admitido</b> puedan pelear por el control de la zona y sus recompensas. Esta zona se considera como una zona de disputa en la que se avisa a todos los jugadores que se aproximan. 
     <br> 
 </p>
 
