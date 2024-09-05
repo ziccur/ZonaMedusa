@@ -5,17 +5,29 @@ local isCountingDown = false
 ESX = exports["es_extended"]:getSharedObject()
 
 --! player crash client
-AddEventHandler('playerDropped', function() 
-    print("ID del crash: ".. _source)
-    local _source = source
-    table.remove(playersOnMedusa, _source)
+
+--[[ 
+    Removes a player from the 'playersOnMedusa' table when they disconnect.
+    
+    Parameters:
+    - None
+    
+    Returns:
+    - None
+--]]
+AddEventHandler('playerDropped', function()
+    for i, player in ipairs(playersOnMedusa) do
+        if player == source then
+            table.remove(playersOnMedusa, i)
+            break
+        end
+    end
 end)
 
 --! player enter zone
 RegisterServerEvent('ZonaMedusa:playerEnteredZone')
 AddEventHandler('ZonaMedusa:playerEnteredZone', function() 
     local _source = source
-    print(_source)
     table.insert(playersOnMedusa, _source)
     print("Jugadores en medusa: " .. json.encode(playersOnMedusa))
 end)
