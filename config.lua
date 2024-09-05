@@ -17,7 +17,7 @@ Config.allowedIllegalJobs = {
 }
 
 Config.NPCspawn = false
-Config.pedModel = 's_m_y_cop_01'
+Config.pedModel = 's_m_y_cop_01'--? https://docs.fivem.net/docs/game-references/ped-models/
 
 Config.conquerKey = 38 --? https://docs.fivem.net/docs/game-references/controls/
 
@@ -43,10 +43,10 @@ Config.legalReward = {
     diamond = 1
 }
 
-Config.BlipColour = 1 --? Color del blip (rojo)
+Config.BlipColour = 1 
 Config.BlipSprite = 429 -- https://docs.fivem.net/docs/game-references/blips/
-Config.BlipAlpha = 50 --? Opacidad del blip
-Config.BlipRadius = 100.0 --? Radio del blip
+Config.BlipAlpha = 50 
+Config.BlipRadius = 100.0 
 
 Config.defaultOwner = 'Nobody'
 

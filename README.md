@@ -23,10 +23,8 @@
 - [Instalacion](#instalacion)
 - [Configuración](#configuracion)
 - [Como usar ZonaMedusa](#uso)
-- [Built Using](#built_using)
-- [Deployment](#deployment)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
+- [Notas de desarrollo](#desarrollo)
+- [Autores](#authors)
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 Requisitos <a name = "requisitos"></a>
@@ -108,25 +106,25 @@ Una vez conquistada la zona, recibirás una recompensa en tu inventario. Si eres
 Se mantendrá la conquista mientras no se reinicie el script o se reinicie el servidor y mientras nadie conquiste la zona de disputa.
 
 
-## 🚀 Deployment <a name = "deployment"></a>
+## 🚀 Notas de desarrollo <a name = "desarrollo"></a>
 
-Add additional notes about how to deploy this on a live system.
+Documentación seguida oficial y recursos utilizados para el desarrollo del script:
+- [Documentation Oficial de ESX](https://documentation.esx-framework.org/legacy/installation)
+- [Documentación Oficial de FiveM](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/)
+- [Documentación Oficial de Lua](https://www.lua.org/manual/5.1/es/)
+- [KeyMap de FiveM](https://docs.fivem.net/docs/game-references/controls/)
+- [Referencias de Ped's GTA](https://docs.fivem.net/docs/game-references/ped-models/)
+- [Referencias de Blips GTA](https://docs.fivem.net/docs/game-references/blips/)
 
-## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+## ✍️ Autor & Contribuidores <a name = "authors"></a>
 
-## ✍️ Authors <a name = "authors"></a>
+- [@ziccur](https://github.com/ziccur) - Idea principal y desarrollo del script
+- [@jitodv](https://github.com/jitodv) - Compementación de idea principal
+- [@Yxel14](https://github.com/Yxelixx14) - Revisión de código
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+####  💌 If you want to support project or contact with me:
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+- <b>Discord:</b> Ziccur
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+[![BUY ME A COFFEE](https://miro.medium.com/v2/resize:fit:1400/1*VJdus0nKuy1uNoByh5BN3w.png)](https://buymeacoffee.com/ziccur)
