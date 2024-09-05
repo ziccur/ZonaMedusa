@@ -12,8 +12,7 @@ Config.allowedJobs = {
 }
 
 Config.allowedIllegalJobs = {
-    'mafia',
-    'cartel'
+    'mechanic'
 }
 
 Config.NPCspawn = false
@@ -28,7 +27,7 @@ Config.Size = {
 }
 
 Config.timeToConquer = 10 --? Time to conquer the zone (seconds)
-Config.timeToReward = 300 --? Time to reward the zone (seconds)
+Config.timeToReward = 5 --? Time to reward the zone (seconds)
 
 Config.ilegalReward = {
     cocaine_bag = 1,

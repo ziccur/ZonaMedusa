@@ -1,4 +1,5 @@
 local ownerOfMedusa = Config.defaultOwner
+local jobNameOfOwner = nil
 local playersOnMedusa = {}
 local isCountingDown = false
 ESX = exports["es_extended"]:getSharedObject()
@@ -62,6 +63,7 @@ AddEventHandler('conquerZone', function()
     local _source = source
     isCountingDown = true
     ownerOfMedusa = ESX.GetPlayerFromId(_source).job.label
+    jobNameOfOwner = ESX.GetPlayerFromId(_source).job.name
 end)
 
 --! get countdown
@@ -102,6 +104,29 @@ end)
 --! ---------------------------------------------------------------
 --! ----------------------  Functions  ------------------------------
 --! ---------------------------------------------------------------
+
+CreateThread(function()
+    while true do
+       
+        Wait(1000 * Config.timeToReward)
+        if jobNameOfOwner ~= nil then
+            
+            for k, i in ipairs(Config.allowedJobs) do
+                if jobNameOfOwner == i then
+                    giveRewards('legal', _source, getPlayersToReward())
+                    break
+                end
+            end
+            for k, i in ipairs(Config.allowedIllegalJobs) do
+                if jobNameOfOwner == i then
+                    giveRewards('ilegal', _source, getPlayersToReward())
+                    break
+                end
+            end
+        end
+    end
+end)
+
 
 --[[ 
     Retrieves a list of players to reward based on their job label.
@@ -186,12 +211,13 @@ RegisterCommand('changeOwnerOfMedusa', function(source, args, rawCommand)
 
     if player.getGroup() == 'admin' then
 
-        if args[1] == nil then
-            TriggerClientEvent('esx:showNotification', source, 'Debes especificar un dueño para la zona Medusa. Uso: /changeOwnerOfMedusa [nombre]')
+        if args[1] == nil or args[2] == nil then
+            TriggerClientEvent('esx:showNotification', source, 'Debes especificar un dueño para la zona Medusa. Uso: /changeOwnerOfMedusa [nombre del trabajo] [label del trabajo] ')
             return
         end
 
-        ownerOfMedusa = args[1]
+        ownerOfMedusa = args[2]
+        jobNameOfOwner = args[1]
         TriggerClientEvent('esx:showNotification', source, 'Has cambiado el dueño de la zona Medusa a ' .. ownerOfMedusa    )
     else
         TriggerClientEvent('esx:showNotification', source, 'No tienes permisos para ejecutar este comando.')
