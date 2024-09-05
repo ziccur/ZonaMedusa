@@ -109,6 +109,8 @@ CreateThread(function()
     while true do
         Wait(1000)
 
+        print(TranslateCap('test'))
+
         TriggerServerEvent('getOwnerOfMedusa')
         local playerPed = PlayerPedId()
 

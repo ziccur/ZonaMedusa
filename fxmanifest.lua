@@ -9,8 +9,11 @@ version '1.0'
 legacyversion '1.9.1'
 
 shared_script {
-	'config.lua',
-	'@es_extended/imports.lua'	
+	'@es_extended/imports.lua',
+	'@es_extended/locale.lua',
+	'locales/em.lua',
+	'locales/es.lua',
+	'config.lua'
 }
 
 client_scripts {
@@ -23,3 +26,7 @@ server_scripts {
 	'server/server.lua'
 }
 
+dependency{
+	'es_extended',
+	'esx_banking',
+} 
