@@ -147,12 +147,12 @@ function getPlayersToReward()
     local playersToReward = {}
     players = GetPlayers()
 
-    print("players: " .. json.encode(players))
     for k, i in pairs(players) do
         if ESX.GetPlayerFromId(i).job.label == ownerOfMedusa then
             table.insert(playersToReward, i)
         end
     end
+    
     return playersToReward
 end
 
@@ -173,7 +173,7 @@ end
 function giveRewards(typeofJob, source, listOfPlayersToReward) --! typeofJob = 'legal' or 'ilegal'
     if ownerOfMedusa ~= Config.defaultOwner then
 
-        for i, _ in pairs(listOfPlayersToReward) do
+        for k, i in pairs(listOfPlayersToReward) do
             TriggerClientEvent('esx:showNotification', i, 'Has recibido tu recompensa por conquistar la zona')
 
             local rewards = Config[typeofJob .. 'Reward']
