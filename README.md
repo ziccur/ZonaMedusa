@@ -58,6 +58,9 @@ Una vez clonado el repositorio, deberás de añadir el script a tu archivo de co
 
 <img src="https://cdn.discordapp.com/attachments/1234234265437212754/1281058441502130196/undefined_-_Imgur.png?ex=66da5625&is=66d904a5&hm=e7a3e74eea575743587321aa50617f540996054e7d6e5d244de4afd12bdddf83&" alt="server.cfg" width="500"/>
 
+
+Para acabar de ver los cambios en tu servidor, deberás de reiniciar el servidor o ejecutar el comando <u> <b> ensure ZonaMedusa </b></u> en la consola de tu servidor.
+
 ##  🔩 Configuración <a name="configuracion"></a>
 
 Para configurar el script, deberás de modificar el archivo <u> <b> config.lua </b></u> que se encuentra en la carpeta del script. A continuacion una lista de las variables que puedes modificar y su descripción:
