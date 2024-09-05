@@ -21,6 +21,7 @@
 
 - [Requisitos](#requisitos)
 - [Instalacion](#instalacion)
+- [Configuración](#configuracion)
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
@@ -53,28 +54,37 @@ Clona el repositorio en tu la carpeta <u> <b> resources</b></u> de tu servidor d
 
 Una vez clonado el repositorio, deberás de añadir el script a tu archivo de configuración de recursos <u> <b> server.cfg </b></u> de tu servidor.
 
-
-
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
 ```
-Give an example
+ ensure ZonaMedusa 
 ```
 
-### And coding style tests
 
-Explain what these tests test and why
+<img src="https://cdn.discordapp.com/attachments/1234234265437212754/1281058441502130196/undefined_-_Imgur.png?ex=66da5625&is=66d904a5&hm=e7a3e74eea575743587321aa50617f540996054e7d6e5d244de4afd12bdddf83&" alt="server.cfg" width="500"/>
 
-```
-Give an example
-```
+##  🔩 Configuración <a name="configuracion"></a>
+
+Para configurar el script, deberás de modificar el archivo <u> <b> config.lua </b></u> que se encuentra en la carpeta del script. A continuacion una lista de las variables que puedes modificar y su descripción:
+
+- <a >Config.Lenguage </a> = Idioma del script, por defecto es "es" (Español)
+- <a >Config.location </a> = Coordenadas de la zona de disputa (x,y,z)
+- <a >Config.allowedJobs </a> = Lista de trabajos <b> legales </b> que pueden conquistar la zona de disputa
+- <a >Config.allowedIllegalJobs </a> = Lista de trabajos <b> no legales </b> que pueden conquistar la zona de disputa
+- <a >Config.NPCspawn </a> = Escoge si quieres que aparezca un NPC en medio de la zona de disputa
+- <a >Config.pedModel</a> = Modelo del NPC que aparecerá en la zona de disputa
+- <a >Config.conquerKey </a> = Tecla que usaran los jugadores para conquistar la zona de disputa
+- <a >Config.Size </a> = Tamaño de la zona de disputa	
+- <a >Config.timeToConquer </a> = Tiempo en <b> segundos </b> que se tarda en conquistar la zona
+- <a >Config.timeToReward </a> = Frequencia en <b> segundos </b> que se reparten las recompensas
+- <a >Config.ilegalReward </a> = Recompensa que se reparte a los trabajos ilegales -> <a >Config.allowedIllegalJobs </a>
+- <a >Config.legalReward </a> = Recompensa que se reparte a los trabajos legales -> <a >Config.allowedJobs </a>
+
+- <a >Config.BlipColour </a> = Color del blip de la zona de disputa
+- <a >Config.BlipSprite </a> = Sprite del blip de la zona de disputa (dibuo)
+- <a >Config.BlipAlpha </a> = Opacidad del blip de la zona de disputa
+- <a >Config.defaultOwner </a> = Dueño de la zona de disputa por defecto
+
+
+
 
 ## 🎈 Usage <a name="usage"></a>
 

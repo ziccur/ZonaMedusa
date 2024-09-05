@@ -93,7 +93,7 @@ function createBlip()
     EndTextCommandSetBlipName(blip)
 
     -- Crear el blip de radio (zona)
-    local blipRadius = AddBlipForRadius(location.x, location.y, location.z, Config.range)
+    local blipRadius = AddBlipForRadius(location.x, location.y, location.z, Config.Size.x)
     SetBlipColour(blipRadius, 1)
     SetBlipAlpha(blipRadius, 50)
 end

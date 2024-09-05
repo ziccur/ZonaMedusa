@@ -1,3 +1,6 @@
+
+-- All configs explained in the README.md file
+
 Config= {}
 
 Config.Lenguage = 'en'
@@ -16,9 +19,9 @@ Config.allowedIllegalJobs = {
 Config.NPCspawn = false
 Config.pedModel = 's_m_y_cop_01'
 
-Config.conquerKey = 38 --? Tecla para conquistar la zona
+Config.conquerKey = 38 --? https://docs.fivem.net/docs/game-references/controls/
 
-Config.Size = { --? Tamaño de la zona
+Config.Size = { 
     x = 100,
     y = 100,
     z = 100
@@ -34,16 +37,15 @@ Config.ilegalReward = {
 }
 
 Config.legalReward = {
-    --? You can use "money", "bank" or "item" as reward
+    --? You can use "money", "bank" or item name as reward
     money = 1000,
     bank = 1000,
     diamond = 1
 }
 
 Config.BlipColour = 1 --? Color del blip (rojo)
-Config.BlipSprite = 429 --? Icono del blip (icono de la policía)
+Config.BlipSprite = 429 -- https://docs.fivem.net/docs/game-references/blips/
 Config.BlipAlpha = 50 --? Opacidad del blip
-Config.range = 100.0 --? Rango del blip
 
-Config.defaultOwner = 'Nobody' --? Dueño por defecto de la zona
+Config.defaultOwner = 'Nobody'
 
