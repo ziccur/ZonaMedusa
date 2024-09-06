@@ -63,7 +63,7 @@ Para acabar de ver los cambios en tu servidor, deberás de reiniciar el servidor
 
 ##  🔩 Configuración <a name="configuracion"></a>
 
-Para configurar el script, deberás de modificar el archivo <u> <b> config.lua </b></u> que se encuentra en la carpeta del script. A continuacion una lista de las variables que puedes modificar y su descripción:
+Para configurar el script, deberás de modificar el archivo <u> <b> config.lua </b></u> que se encuentra en la carpeta del script. A continuación una lista de las variables que puedes modificar y su descripción:
 
 - <a >Lenguage </a> = Idioma del script, por defecto es "es" (Español)
 - <a >location </a> = Coordenadas de la zona de disputa (x,y,z)
