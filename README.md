@@ -24,6 +24,7 @@
 - [Configuración](#configuracion)
 - [Como usar ZonaMedusa](#uso)
 - [Notas de desarrollo](#desarrollo)
+- [Comandos](#comandos)
 - [Autores](#authors)
 
 ## 🧐 Requisitos <a name = "requisitos"></a>
@@ -117,6 +118,17 @@ Documentación seguida oficial y recursos utilizados para el desarrollo del scri
 - [KeyMap de FiveM](https://docs.fivem.net/docs/game-references/controls/)
 - [Referencias de Ped's GTA](https://docs.fivem.net/docs/game-references/ped-models/)
 - [Referencias de Blips GTA](https://docs.fivem.net/docs/game-references/blips/)
+
+## 🛠 Comandos <a name="comandos"></a>
+
+Se han añadido comandos para uso a nivel de administrador, estos comandos son los siguientes:
+
+- /changeOwnerOfMedusa <job name> <job label> -> Cambia el dueño de la zona de disputa a un trabajo especifico
+
+Ejemplo:
+```
+  /changeOwnerOfMedusa police LSPD
+```
 
 
 ## ✍️ Autor & Contribuidores <a name = "authors"></a>
