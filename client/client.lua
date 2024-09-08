@@ -8,27 +8,13 @@ local isInside = false
 local wantToConquer = false
 local blip = nil
 local ownerOfMedusaShowed = ownerOfMedusa --! check if this is
-local areOthers = false
 local time = Config.timeToConquer
 local isCountingDown = false
-local otherConquering = true
 
 --! Recive Owner of Medusa <- server
 RegisterNetEvent('receiveOwnerOfMedusa')
 AddEventHandler('receiveOwnerOfMedusa', function(ownerOfMedusaServer)
     ownerOfMedusa = ownerOfMedusaServer
-end)
-
---! Recive if are others in zone
-RegisterNetEvent('receiveAreOthers')
-AddEventHandler('receiveAreOthers', function(areOthersServer)
-    areOthers = areOthersServer
-end)
-
---! Recive if are others conquering
-RegisterNetEvent('receiveOtherConquering')
-AddEventHandler('receiveOtherConquering', function(otherConqueringServer)
-    otherConquering = otherConqueringServer
 end)
 
 function allowedJob()
@@ -56,22 +42,13 @@ end
 function conquer()
      
     TriggerServerEvent('getOwnerOfMedusa')
+ --! Alive, in zone, allowed job and no one is 
 
-    if areOthers then --! Alive, in zone, allowed job, and others on zone
-        ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
-        return false
-    else --! Alive, in zone, allowed job and no one is 
-
-        if otherConquering then
-            ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
-            return false
-        else
-            isConquering = true
-            ownerOfMedusa = ESX.PlayerData.job.label
-            ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
-            return true
-        end
-    end
+    isConquering = true
+    ownerOfMedusa = ESX.PlayerData.job.label
+    ESX.ShowNotification('~g~ Has comenzado a conquistar la zona Medusa')
+    return true
+    
 end
 
 function createBlip()
@@ -108,9 +85,6 @@ createBlip()
 CreateThread(function()
     while true do
         Wait(1000)
-
-        print(TranslateCap('test'))
-
         TriggerServerEvent('getOwnerOfMedusa')
         local playerPed = PlayerPedId()
 
@@ -121,10 +95,6 @@ CreateThread(function()
                 if not isInside then --! Mark as inside zone
                     isInside = true
                     ESX.ShowNotification('~g~ Has entrado a la zona Medusa')
-                    
-                    if allowedJob() then --! Alive, in zone and allowed job
-                        TriggerServerEvent("ZonaMedusa:playerEnteredZone")
-                    end
 
                 end
                 
@@ -145,12 +115,7 @@ CreateThread(function()
 
                         if wantToConquer then --! Alive, in zone, allowed job and pressing keys
                             if inZone() then --! Alive, in zone, allowed job, not conquering and pressing keys, and still in zone
-                                TriggerServerEvent('getCountingDown')
-                                if not otherConquering then
-                                    isConquering = conquer()
-                                else
-                                    ESX.ShowNotification('~r~ Hay otros jugadores conquistando la zona')
-                                end
+                                isConquering = conquer()
                                 if not isConquering then
                                     wantToConquer = false
                                 end
@@ -176,7 +141,6 @@ CreateThread(function()
                         if time ~= nill and time <= 0 then
                             ESX.ShowNotification('~g~ Has conquistado la zona Medusa')
                             TriggerServerEvent("conquerZone")
-                            TriggerServerEvent("stopCountingDown")
                         end
                         time = Config.timeToConquer
                         isConquering = false
@@ -194,12 +158,10 @@ CreateThread(function()
                         if allowedJob() then --! Alive, just leave zone and allowed job
 
                             if isConquering then --! Alive, just leave zone, allowed job and was conquering
-                                TriggerServerEvent("stopCountingDown")
                                 isConquering = false
                                 wantToConquer = false
                             end
 
-                            TriggerServerEvent("ZonaMedusa:playerLeftZone")
                         end
                     end
             end
@@ -221,7 +183,6 @@ CreateThread(function()
 
                 if isInside and allowedJob then  --! Dead and was inside zone AND has allowed job
 
-                    TriggerServerEvent("ZonaMedusa:playerLeftZone")
                     isInside = false 
                     
                 end

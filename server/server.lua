@@ -1,50 +1,7 @@
 local ownerOfMedusa = Config.defaultOwner
 local jobNameOfOwner = nil
-local playersOnMedusa = {}
-local isCountingDown = false
 ESX = exports["es_extended"]:getSharedObject()
 
---! player crash client
-
---[[ 
-    Removes a player from the 'playersOnMedusa' table when they disconnect.
-    
-    Parameters:
-    - None
-    
-    Returns:
-    - None
---]]
-AddEventHandler('playerDropped', function()
-    for i, player in ipairs(playersOnMedusa) do
-        if player == source then
-            table.remove(playersOnMedusa, i)
-            break
-        end
-    end
-end)
-
---! player enter zone
-RegisterServerEvent('ZonaMedusa:playerEnteredZone')
-AddEventHandler('ZonaMedusa:playerEnteredZone', function() 
-    local _source = source
-    table.insert(playersOnMedusa, _source)
-end)
-
---! player leave zone
-RegisterServerEvent('ZonaMedusa:playerLeftZone')
-AddEventHandler('ZonaMedusa:playerLeftZone', function()
-    local _source = source
-    table.remove(playersOnMedusa, _source)
-end)
---! player disconnect
-RegisterNetEvent('ZonaMedusa:playerDisconnecting')
-AddEventHandler('ZonaMedusa:playerDisconnecting', function(reason)
-    local source = source
-    if playersOnMedusa[source] then
-        playersOnMedusa[source] = nil
-    end
-end)
 
 --! NPC spawn ped
 if Config.NPCspawn then
@@ -90,20 +47,6 @@ AddEventHandler('stopCountingDown', function()
     getPlayersToReward() 
 end)
 
---! return if are others in zone
-RegisterNetEvent('getAreOthers')
-AddEventHandler('getAreOthers', function()
-    local _source = source
-    job = ESX.GetPlayerFromId(_source).job.label
-
-    for i, _ in pairs(playersOnMedusa) do
-        if ESX.GetPlayerFromId(i).job.label ~= job then
-            TriggerClientEvent('receiveAreOthers', _source, true)
-        end
-    end
-    TriggerClientEvent('receiveAreOthers', _source, false)
-end)
-
 --! event conquer zone
 RegisterNetEvent('conquerZone')
 AddEventHandler('conquerZone', function()
@@ -117,7 +60,6 @@ end)
 
 CreateThread(function()
     while true do
-       
         Wait(1000 * Config.timeToReward)
         if jobNameOfOwner ~= nil then
             
