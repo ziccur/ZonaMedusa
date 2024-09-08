@@ -25,8 +25,8 @@ Config= {
         z = 100
     },
 
-    timeToConquer = 10, --? Time to conquer the zone (seconds)
-    timeToReward = 5, --? Time to reward the zone (seconds)
+    timeToConquer = 300, --? Time to conquer the zone (seconds)
+    timeToReward = 350, --? Time to reward the zone (seconds)
 
     ilegalReward = {
         cocaine_bag = 1,
