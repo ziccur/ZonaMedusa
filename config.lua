@@ -3,8 +3,6 @@
 
 Config= {
 
-    Locale = GetConvar('esx:locale', 'es'), --? https://docs.fivem.net/docs/scripting-reference/convars/
-
     location = vector3(1748.0743, 3268.5168, 41.2383),
 
     allowedJobs = {
