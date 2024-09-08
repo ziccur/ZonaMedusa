@@ -1,3 +1,6 @@
+--! Set lofales to config
+
+local locales = Config.locales -- "es" or "en"
 
 --! VARIABLES
 
