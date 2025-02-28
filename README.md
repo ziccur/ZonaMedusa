@@ -13,7 +13,7 @@
 
 ---
 
-<p align="left"> ZonaMedusa és un script para servidores de <b>FiveM (ESX) </b> que permite tener una zona localizada en el mapa donde los jugadores con un <b>banda o trabajo admitido</b> puedan pelear por el control de la zona y sus recompensas. Esta zona se considera como una zona de disputa en la que se avisa a todos los jugadores que se aproximan. 
+<p align="left"> ZonaMedusa es un script para servidores de <b>FiveM (ESX) </b> que permite tener una zona localizada en el mapa donde los jugadores con una <b>facción o trabajo admitido</b> puedan luchar por el control de la zona y sus recompensas. Esta zona se considera como una zona de disputa en la que se avisa a todos los jugadores que se aproximan. 
     <br> 
 </p>
 
@@ -134,7 +134,7 @@ Ejemplo:
 ## ✍️ Autor & Contribuidores <a name = "authors"></a>
 
 - [@ziccur](https://github.com/ziccur) - Idea principal y desarrollo del script
-- [@jitodv](https://github.com/jitodv) - Compementación de idea principal
+- [@jitodv](https://github.com/jitodv) - Complementación de idea principal
 - [@Yxel14](https://github.com/Yxelixx14) - Revisión de código
 
 ####  💌 If you want to support project or contact with me:
